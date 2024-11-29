@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pastiya/screens/reminder_card.dart';
 import '../reminder_service.dart'; // Importa la lógica de recordatorios
 import 'bottom_nav_bar.dart'; // Importa la barra de navegación personalizada
 import '../add_reminder_button.dart'; // Importa el botón flotante
 import '../screens/add_reminder_screen.dart';
+// Importa el nuevo widget ReminderCard
 
 class HomeScreen extends StatefulWidget {
   final String email;
@@ -45,9 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: reminders.length,
               itemBuilder: (context, index) {
                 final reminder = reminders[index];
-                return ListTile(
-                  title: Text(reminder['medicamento']),
-                  subtitle: Text('Hora: ${reminder['hora']}'),
+                return ReminderCard(
+                  medicamento: reminder['medicamento'],
+                  hora: reminder['hora'],
                 );
               },
             ),
