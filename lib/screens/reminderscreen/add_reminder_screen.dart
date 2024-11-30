@@ -50,56 +50,149 @@ class _AddReminderScreenState extends State<AddReminderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agregar Recordatorio'),
+
+          //  child: Text('Registrarse', style: TextStyle(fontSize: 18, color: Colors.white)),
+        title: const Text('Agregar Recordatorio', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.teal,
+        elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _medicamentoController,
-              decoration: const InputDecoration(labelText: 'Nombre del Medicamento'),
-            ),
-            const SizedBox(height: 16),
-            FrequencySelector(
-              onSelected: (selected) {
-                setState(() {
-                  _selectedFrequency = selected;
-                });
-              },
-            ),
-            if (_selectedFrequency != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Text(
-                  'Frecuencia seleccionada: $_selectedFrequency',
-                  style: const TextStyle(fontSize: 16, color: Colors.black87),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildTextField(
+                controller: _medicamentoController,
+                label: 'Nombre del Medicamento',
+                icon: Icons.medical_services,
+              ),
+              const SizedBox(height: 16),
+
+              // Selector de frecuencia
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 5,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      FrequencySelector(
+                        onSelected: (selected) {
+                          setState(() {
+                            _selectedFrequency = selected;
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 16),
+
+                      // Mostrar la frecuencia seleccionada
+                      if (_selectedFrequency != null)
+                        Text(
+                          '$_selectedFrequency',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        )
+                      else
+                        const Text(
+                          'Seleccionar Frecuencia',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _horaController,
-              readOnly: true,
-              onTap: () async {
-                TimeOfDay? selectedTime = await showTimePicker(
-                  context: context,
-                  initialTime: TimeOfDay.now(),
-                );
-                if (selectedTime != null) {
-                  setState(() {
-                    _horaController.text =
-                        '${selectedTime.hour.toString().padLeft(2, '0')}:${selectedTime.minute.toString().padLeft(2, '0')}';
-                  });
-                }
-              },
-              decoration: const InputDecoration(labelText: 'Hora'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _addReminder,
-              child: const Text('Agregar Recordatorio'),
-            ),
-          ],
+              const SizedBox(height: 16),
+
+              // Campo de hora con selector
+              _buildTimeField(context),
+
+              const SizedBox(height: 32),
+
+              // Botón para agregar recordatorio
+              Center(
+                child: ElevatedButton(
+                  onPressed: _addReminder,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    backgroundColor: Colors.pink,
+                  ),
+                  child: const Text('Agregar Recordatorio', style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Función para construir los campos de texto reutilizables
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+  }) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            labelText: label,
+            prefixIcon: Icon(icon,),
+            border: InputBorder.none,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Campo de texto para la hora con el selector de hora
+  Widget _buildTimeField(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      elevation: 5,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextField(
+          controller: _horaController,
+          readOnly: true,
+          onTap: () async {
+            TimeOfDay? selectedTime = await showTimePicker(
+              context: context,
+              initialTime: TimeOfDay.now(),
+            );
+            if (selectedTime != null) {
+              setState(() {
+                _horaController.text =
+                    '${selectedTime.hour.toString().padLeft(2, '0')}:${selectedTime.minute.toString().padLeft(2, '0')}';
+              });
+            }
+          },
+          decoration: const InputDecoration(
+            labelText: 'Hora',
+            prefixIcon: Icon(Icons.access_time),
+            border: InputBorder.none,
+          ),
         ),
       ),
     );

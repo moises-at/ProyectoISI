@@ -6,9 +6,9 @@ class FrequencySelector extends StatelessWidget {
   final Function(String) onSelected;
 
   const FrequencySelector({
-    Key? key,
+    super.key,
     required this.onSelected,
-  }) : super(key: key);
+  });
 
   void _showFrequencyOptions(BuildContext context) {
     showModalBottomSheet(
@@ -84,9 +84,9 @@ class FrequencySelector extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0),
           border: Border.all(color: Colors.teal),
         ),
-        child: Row(
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
+          children: [
             Text(
               'Seleccionar Frecuencia',
               style: TextStyle(

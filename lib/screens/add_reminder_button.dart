@@ -29,7 +29,7 @@ class AddReminderButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(50.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.green,
+            color: Colors.teal,
             borderRadius: BorderRadius.circular(50.0),
           ),
           child: Icon(Icons.add, color: Colors.white),

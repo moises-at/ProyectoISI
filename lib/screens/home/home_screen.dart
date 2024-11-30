@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pastiya/screens/home/reminder_card.dart';
-import '../../reminder_service.dart'; // Importa la lógica de recordatorios
-import 'bottom_nav_bar.dart'; // Importa la barra de navegación personalizada
-import '../../add_reminder_button.dart'; // Importa el botón flotante
+import '../../reminder_service.dart';
+import 'bottom_nav_bar.dart';
+import '../../add_reminder_button.dart';
 import '../reminderscreen/add_reminder_screen.dart';
-// Importa el nuevo widget ReminderCard
 
 class HomeScreen extends StatefulWidget {
   final String email;
@@ -30,11 +29,19 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
+  
+Future<void> _removeReminder(int index) async {
+  final removedReminder = reminders[index]; // Obtiene el recordatorio que se va a eliminar
+  reminders.removeAt(index); // Remueve el recordatorio localmente
+  await _reminderService.deleteReminder(widget.email, removedReminder); // Elimina del servicio/backend
+  setState(() {}); // Reconstruye la UI
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Recordatorios'),
+        title: const Text('Recordatorios', textAlign: TextAlign.left),
       ),
       body: reminders.isEmpty
           ? const Center(
@@ -50,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return ReminderCard(
                   medicamento: reminder['medicamento'],
                   hora: reminder['hora'],
+                  onCompleted: () => _removeReminder(index), // Llama a _removeReminder
                 );
               },
             ),

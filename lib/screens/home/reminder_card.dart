@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 class ReminderCard extends StatelessWidget {
   final String medicamento;
   final String hora;
+  final VoidCallback onCompleted; // Callback para manejar el check
 
-  const ReminderCard({required this.medicamento, required this.hora, Key? key})
-      : super(key: key);
+  const ReminderCard({
+    required this.medicamento,
+    required this.hora,
+    required this.onCompleted,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,24 +23,33 @@ class ReminderCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              medicamento,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  medicamento,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Hora: $hora',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 8),
-            Text(
-              'Hora: $hora',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
-              ),
+            IconButton(
+              icon: const Icon(Icons.check_circle, color: Colors.white),
+              onPressed: onCompleted, // Llama al callback al pulsar el botón
             ),
           ],
         ),
