@@ -10,7 +10,7 @@ class ReminderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.blue.shade100,
+      color: Colors.teal,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -26,7 +26,7 @@ class ReminderCard extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue.shade900,
+                color: Colors.white,
               ),
             ),
             SizedBox(height: 8),
@@ -34,7 +34,7 @@ class ReminderCard extends StatelessWidget {
               'Hora: $hora',
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.blue.shade700,
+                color: Colors.white,
               ),
             ),
           ],

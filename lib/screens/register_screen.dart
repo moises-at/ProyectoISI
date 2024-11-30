@@ -102,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 onPressed: _register,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  child: Text('Registrarse', style: TextStyle(fontSize: 18)),
+                  child: Text('Registrarse', style: TextStyle(fontSize: 18, color: Colors.white)),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.teal,

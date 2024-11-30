@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pastiya/screens/home_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/home_screen.dart';
+import 'package:pastiya/screens/home/home_screen.dart';
+// import 'package:pastiya/screens/home/home_screen.dart';
+import 'package:pastiya/screens/reminderscreen/add_reminder_screen.dart';
+// import 'screens/login_screen.dart';
+// import 'screens/home/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,9 +19,9 @@ void main() {
         debugShowCheckedModeBanner: false,
         title: 'App de Medicamentos',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.red,
         ),
-        home: HomeScreen(email: 'fjdfks',),
+        home: HomeScreen(email: 'email'),
       );
     }
   }

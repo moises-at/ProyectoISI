@@ -1,11 +1,14 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'add_reminder_screen.dart'; // Importar la pantalla para agregar recordatorios
+import 'reminderscreen/add_reminder_screen.dart'; // Importar la pantalla para agregar recordatorios
 
 class AddReminderButton extends StatelessWidget {
   final String email;
   final Function refreshReminders;
 
-  AddReminderButton({required this.email, required this.refreshReminders});
+  // ignore: prefer_const_constructors_in_immutables
+  AddReminderButton({super.key, required this.email, required this.refreshReminders});
 
   @override
   Widget build(BuildContext context) {

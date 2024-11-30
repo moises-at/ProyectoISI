@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pastiya/screens/reminder_card.dart';
-import '../reminder_service.dart'; // Importa la lógica de recordatorios
+import 'package:pastiya/screens/home/reminder_card.dart';
+import '../../reminder_service.dart'; // Importa la lógica de recordatorios
 import 'bottom_nav_bar.dart'; // Importa la barra de navegación personalizada
-import '../add_reminder_button.dart'; // Importa el botón flotante
-import '../screens/add_reminder_screen.dart';
+import '../../add_reminder_button.dart'; // Importa el botón flotante
+import '../reminderscreen/add_reminder_screen.dart';
 // Importa el nuevo widget ReminderCard
 
 class HomeScreen extends StatefulWidget {
